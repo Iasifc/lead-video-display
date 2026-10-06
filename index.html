@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Video Display with Lead Popups</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+    .popup {
+      position: absolute;
+      bottom: 40px;
+      right: -400px;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      border-left: 5px solid #28a745;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: right 0.5s ease-in-out;
+      z-index: 10;
+    }
+    .popup.show {
+      right: 40px;
+    }
+    .popup h3 { margin: 0 0 5px 0; color: #28a745; }
+    .popup p { margin: 0; }
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop>
+    <source src="your-video-url.mp4" type="video/mp4" />
+  </video>
+
+  <div id="leadPopup" class="popup">
+    <h3 id="leadTitle">🎉 New Lead!</h3>
+    <p id="leadDetail">John Doe from Acme Corp</p>
+  </div>
+
+  <script>
+    function triggerPopup(name, company) {
+      const popup = document.getElementById('leadPopup');
+      document.getElementById('leadDetail').innerText = `${name} (${company})`;
+      
+      popup.classList.add('show');
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 5000); // Popup stays for 5 seconds
+    }
+
+    // Connect to your websocket or polling endpoint here
+  </script>
+</body>
+</html>
